@@ -67,3 +67,20 @@
 {"level":"info","time":"2024-03-04T22:31:29Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"Database Initialized"}
 {"level":"info","time":"2024-03-04T22:31:29Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"Redis Initialized"}
 {"level":"info","time":"2024-03-04T22:32:03Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"handled /user/delete, latency: 7.649208ms, response status: 200"}
+{"level":"info","time":"2024-03-04T22:46:36Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"Logger Initialized"}
+{"level":"info","time":"2024-03-04T22:46:36Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"Config Initialized"}
+{"level":"info","time":"2024-03-04T22:46:36Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"Database Initialized"}
+{"level":"info","time":"2024-03-04T22:46:36Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"Redis Initialized"}
+{"level":"info","time":"2024-03-04T22:46:40Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"Logger Initialized"}
+{"level":"info","time":"2024-03-04T22:47:13Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"Logger Initialized"}
+{"level":"info","time":"2024-03-04T22:47:31Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"Config Initialized"}
+{"level":"info","time":"2024-03-04T22:47:31Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"Database Initialized"}
+{"level":"info","time":"2024-03-04T22:47:31Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"Redis Initialized"}
+{"level":"info","time":"2024-03-04T22:47:35Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"Logger Initialized"}
+{"level":"info","time":"2024-03-04T22:47:35Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"Config Initialized"}
+{"level":"info","time":"2024-03-04T22:47:35Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"Database Initialized"}
+{"level":"info","time":"2024-03-04T22:47:35Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"Redis Initialized"}
+{"level":"info","time":"2024-03-04T22:47:42Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"Logger Initialized"}
+{"level":"info","time":"2024-03-04T22:47:42Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"Config Initialized"}
+{"level":"info","time":"2024-03-04T22:47:42Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"Database Initialized"}
+{"level":"info","time":"2024-03-04T22:47:42Z","caller":"%!r(string=Backend%!r(string=/Users/thechosenone/GolandProjects/go-gin-template/pkg/log/log.go)outers)outers:18","message":"Redis Initialized"}

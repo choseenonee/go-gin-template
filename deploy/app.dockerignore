@@ -1,4 +1,4 @@
-app.dockerignore
+.dockerignore
 app.Dockerfile
 .git
 .gitignore

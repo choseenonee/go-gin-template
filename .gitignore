@@ -24,4 +24,4 @@ go.work
 .idea/
 
 # Env files
-.env
+deploy/.env
