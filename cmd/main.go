@@ -9,8 +9,6 @@ import (
 )
 
 func main() {
-	// TODO: заполнить .env и .env.example
-
 	logger, loggerInfoFile, loggerErrorFile := log.InitLogger()
 	defer loggerInfoFile.Close()
 	defer loggerErrorFile.Close()
