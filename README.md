@@ -22,3 +22,5 @@ launch redis and postgres:
 goose migration: ``goose -dir deploy/migrations postgres "postgresql://postgres:postgres@localhost:5432/postgres" up``
 <br>
 launch main.go with cmd workdir, and [click](http://127.0.0.1:8080/swagger/index.html#/)
+<br>
+TRACING ONLY IN REFRESH/GETME handlers
