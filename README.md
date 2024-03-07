@@ -25,4 +25,4 @@ goose migration: ``goose -dir deploy/migrations postgres "postgresql://postgres:
 <br>
 launch main.go with cmd workdir, and [click](http://127.0.0.1:8080/swagger/index.html#/)
 <br>
-TRACING ONLY IN REFRESH/GETME handlers
+**_TRACING ONLY IN REFRESH/GETME handlers_**
