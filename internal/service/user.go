@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"github.com/spf13/viper"
+	"go.opentelemetry.io/otel/trace"
 	"template/internal/model/entities"
 	"template/internal/repository"
 	"template/pkg/auth"
@@ -35,7 +36,12 @@ func InitUserService(
 	}
 }
 
-func (u userService) GetMe(ctx context.Context, userID int) (entities.User, error) {
+const (
+	CallToPostgres = "call to postgres"
+)
+
+func (u userService) GetMe(ctx context.Context, userID int, span trace.Span) (entities.User, error) {
+	span.AddEvent(CallToPostgres)
 	return u.userRepo.Get(ctx, userID)
 }
 

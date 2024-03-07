@@ -6,8 +6,10 @@ import (
 	"errors"
 	"fmt"
 	"github.com/gofrs/uuid"
+	"github.com/redis/go-redis/extra/redisotel/v9"
 	"github.com/redis/go-redis/v9"
 	"github.com/spf13/viper"
+	"go.opentelemetry.io/otel/trace"
 	"strconv"
 	"template/internal/model/entities"
 	"template/pkg/config"
@@ -33,12 +35,16 @@ type Session interface {
 	Delete(ctx context.Context, userID int, sessionID string) error
 }
 
-func InitRedis() Session {
+func InitRedis(tracer trace.Tracer) Session {
 	rdb := redis.NewClient(&redis.Options{
 		Addr:     fmt.Sprintf("%v:%v", viper.GetString(config.RedisHost), viper.GetInt(config.RedisPort)),
 		Password: viper.GetString(config.RedisPassword),
 		DB:       0,
 	})
+
+	if err := redisotel.InstrumentTracing(rdb); err != nil {
+		panic(fmt.Sprintf("redis trace init: %v", err.Error()))
+	}
 
 	return RedisSession{rdb, time.Duration(viper.GetInt(config.SessionExpiration)) * time.Hour * 24}
 }

@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"github.com/spf13/viper"
+	"go.opentelemetry.io/otel/trace"
 	"golang.org/x/crypto/bcrypt"
 	"strconv"
 	"template/internal/model/entities"
@@ -107,7 +108,8 @@ func (p publicService) LoginUser(ctx context.Context, userLogin entities.UserCre
 	return jwtToken, userSessionUUID, nil
 }
 
-func (p publicService) Refresh(ctx context.Context, sessionID string) (string, string, error) {
+func (p publicService) Refresh(ctx context.Context, sessionID string, span trace.Span) (string, string, error) {
+	span.AddEvent(CallToRedis)
 	userData, err := p.session.Get(ctx, sessionID)
 	if err != nil {
 		return "", "", err
@@ -116,11 +118,13 @@ func (p publicService) Refresh(ctx context.Context, sessionID string) (string, s
 		return "", "", customerr.UserNotFound
 	}
 
+	span.AddEvent(CallToRedis)
 	newSessionID, err := p.session.UpdateKey(ctx, sessionID, userData.ID)
 	if err != nil {
 		return "", "", err
 	}
 
+	span.AddEvent(CreateToken)
 	userToken := p.jwt.CreateToken(userData.ID)
 
 	return userToken, newSessionID, nil

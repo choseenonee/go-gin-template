@@ -2,6 +2,9 @@ package handlers
 
 import (
 	"github.com/gin-gonic/gin"
+	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/codes"
+	"go.opentelemetry.io/otel/trace"
 	"net/http"
 	"template/internal/delivery/middleware"
 	"template/internal/service"
@@ -11,12 +14,14 @@ import (
 type UserHandler struct {
 	service service.User
 	session cached.Session
+	tracer  trace.Tracer
 }
 
-func InitUserHandler(service service.User, session cached.Session) UserHandler {
+func InitUserHandler(service service.User, session cached.Session, tracer trace.Tracer) UserHandler {
 	return UserHandler{
 		service: service,
 		session: session,
+		tracer:  tracer,
 	}
 }
 
@@ -32,12 +37,21 @@ func InitUserHandler(service service.User, session cached.Session) UserHandler {
 // @Failure 500 {object} map[string]string "Internal server error"
 // @Router /user/me [get]
 func (u UserHandler) GetMe(c *gin.Context) {
-	ctx := c.Request.Context()
+	ctx, span := u.tracer.Start(c.Request.Context(), GetMe)
+	defer span.End()
 
+	span.AddEvent(EventGetUserID)
 	userID := c.GetInt(middleware.CUserID)
 
-	user, err := u.service.GetMe(ctx, userID)
+	span.SetAttributes(attribute.Int(middleware.CUserID, userID))
+
+	span.AddEvent(CallToService)
+	user, err := u.service.GetMe(ctx, userID, span)
 	if err != nil {
+		span.RecordError(err, trace.WithAttributes(
+			attribute.String("SomeErrorInfo", "FATAL!!!!")),
+		)
+		span.SetStatus(codes.Error, err.Error())
 		c.JSON(http.StatusInternalServerError, gin.H{"detail": err})
 		return
 	}
