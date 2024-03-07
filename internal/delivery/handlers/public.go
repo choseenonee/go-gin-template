@@ -3,7 +3,10 @@ package handlers
 import (
 	"errors"
 	"github.com/gin-gonic/gin"
+	"go.opentelemetry.io/otel/attribute"
+	"go.opentelemetry.io/otel/trace"
 	"net/http"
+	"template/internal/delivery/middleware"
 	"template/internal/model/entities"
 	"template/internal/service"
 	"template/pkg/customerr"
@@ -11,11 +14,13 @@ import (
 
 type PublicHandler struct {
 	service service.Public
+	tracer  trace.Tracer
 }
 
-func InitPublicHandler(service service.Public) PublicHandler {
+func InitPublicHandler(service service.Public, tracer trace.Tracer) PublicHandler {
 	return PublicHandler{
 		service: service,
+		tracer:  tracer,
 	}
 }
 
@@ -90,16 +95,20 @@ func (p PublicHandler) LoginUser(c *gin.Context) {
 // @Failure 500 {object} map[string]string "Internal server error"
 // @Router /public/refresh [post]
 func (p PublicHandler) Refresh(c *gin.Context) {
-	ctx := c.Request.Context()
+	ctx, span := p.tracer.Start(c.Request.Context(), Refresh)
+	defer span.End()
 
-	sessionID := c.GetHeader("Session")
+	sessionID := c.GetHeader(middleware.CSessionID)
 
-	userToken, newSessionID, err := p.service.Refresh(ctx, sessionID)
+	span.AddEvent(CallToService)
+	userToken, newSessionID, err := p.service.Refresh(ctx, sessionID, span)
 	if err != nil {
 		if errors.Is(err, customerr.UserNotFound) {
 			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"detail": err.Error()})
 		}
 		c.AbortWithStatusJSON(http.StatusInternalServerError, err)
+		span.RecordError(err, trace.WithAttributes(
+			attribute.String(middleware.CSessionID, sessionID)))
 		return
 	}
 

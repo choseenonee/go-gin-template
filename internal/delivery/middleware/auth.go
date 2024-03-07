@@ -15,7 +15,7 @@ import (
 
 const (
 	CUserID    = "userID"
-	CSessionID = "sessionID"
+	CSessionID = "Session"
 )
 
 func (m Middleware) Authorization() gin.HandlerFunc {

@@ -25,3 +25,6 @@ go.work
 
 # Env files
 deploy/.env
+
+# log files
+*.log
