@@ -32,8 +32,12 @@ func InitConfig() {
 	viper.SetConfigName(".env")
 	viper.SetConfigType("env")
 	viper.AddConfigPath(envPath)
-	err := viper.ReadInConfig()
 
+	// makes Viper check if environment variables match any of the existing keys (config, default or flags).
+	//If matching env vars are found, they are loaded
+	viper.AutomaticEnv()
+
+	err := viper.ReadInConfig()
 	if err != nil {
 		panic(fmt.Sprintf("Failed to init config. Error:%v", err.Error()))
 	}
